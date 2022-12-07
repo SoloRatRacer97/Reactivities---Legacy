@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Extensions;
+using Application.Activities;
+using Application.Core;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,31 +28,14 @@ namespace API
                   _config = config;
             
         }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
-            });
-
-            services.AddDbContext<DataContext>(opt => 
-            {
-                opt.UseSqlite(_config.GetConnectionString("DefaultConnection"));
-            });
-
-            // I think this lets us use localhost3000 as a place we can extract data from? Without this, Cors would not like this and it would restrict us from sharing resources between, different domains? Seems like you would need this in any .net app since you would always have a seperate backend server....
-            services.AddCors(opt => 
-            {
-                opt.AddPolicy("CorsPolicy", policy => 
-                {
-                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
-                });
-            });
-        }
+            // This is where we took out some of the basic application setup code and put it into AddApplicationServices
+            services.AddApplicationServices(_config);
+       }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
