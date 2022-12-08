@@ -4,18 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-      // ACtiviitesController 'extends; BaseApiController
-      // Telling it 'Activities' so it looks in the activities folder
+      // ActiviitesController 'extends; BaseApiController. This is called dependancy injection, I'm pretty sure.
       public class ActivitiesController : BaseApiController
       {
-
-
             [HttpGet]
             public async Task<ActionResult<List<Activity>>> GetActivities()
             {
                 return await Mediator.Send(new List.Query());
             }
-
+            
             [HttpGet("{id}")]
             public async Task<ActionResult<Activity>> GetActivity(Guid id)
             {

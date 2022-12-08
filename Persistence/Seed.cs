@@ -6,8 +6,10 @@ using Domain;
 
 namespace Persistence
 {
+    // Seed data for our database. Nothing important here escept the syntax for how this is done in C#.
     public class Seed
     {
+        // Do not know why the mehtod is static here.....
         public static async Task SeedData(DataContext context)
         {
             if (context.Activities.Any()) return;
@@ -105,7 +107,7 @@ namespace Persistence
                     Venue = "Cinema",
                 }
             };
-
+            
             await context.Activities.AddRangeAsync(activities);
             await context.SaveChangesAsync();
         }

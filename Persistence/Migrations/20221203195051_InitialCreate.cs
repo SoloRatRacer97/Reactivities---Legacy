@@ -9,6 +9,9 @@ namespace Persistence.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            // This class makes a database for us. Cool becasue we do not need to code SQL syntax and the migration builds this for us with info that we had in our DataContext file. 
+
+            // Keep in mind that when we define out Gui, we need to use the work Id so that entity framework know what to set the primary key as. Very important.
             migrationBuilder.CreateTable(
                 name: "Activities",
                 columns: table => new

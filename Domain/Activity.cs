@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
+    // Createing the Activity class to define what kind of stucture we want for the activities we will be working with.
     public class Activity
     {
         public Guid Id { get; set; }

@@ -4,6 +4,9 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+// The controller gets its name from the WeatherForecast(-Controller) name below. 
+
+// Note that every controller derives from ControllerBase and we will see this again and again with MVCs
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -19,6 +22,7 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
+    // For the Get requests, return this data in an array that comes from the WeatherForcase class:
     public IEnumerable<WeatherForecast> Get()
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast

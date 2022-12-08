@@ -23,10 +23,13 @@ namespace API
 
             try 
             {
+                // Trying to create a database from DataContext
                 var context = services.GetRequiredService<DataContext>();
                 await context.Database.MigrateAsync();
+                // This is the actual code that seeds the database:
                 await Seed.SeedData(context);
             }
+            // Seeting up catch incase we get an error. 
             catch (Exception ex)
             {
                 var logger = services.GetRequiredService<ILogger<Program>>();
